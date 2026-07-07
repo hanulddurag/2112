@@ -428,7 +428,6 @@
 
         <!-- 3. 비린내라뇨! -->
         <section id="tab-fish" class="tab-content bg-white p-8 rounded-2xl shadow-sm">
-            <!-- 물고기 이모티콘 🐟 삭제 -->
             <h2 class="text-3xl font-bold mb-6 text-teal-600 border-b pb-3">비린내라뇨!</h2>
             
             <!-- 제목 프리뷰 -->
@@ -474,6 +473,7 @@
 
             <h3 class="font-bold text-xl mb-4 text-slate-800">시의 구조와 내용</h3>
             <div class="ml-[3.4rem]">
+                <!-- 전반부 수정: 비린내의 의미 추가 -->
                 <div class="bg-white border-l-4 border-teal-400 shadow-sm p-8 mb-6 rounded-r-xl border-y border-r border-slate-100">
                     <h4 class="text-2xl text-teal-700 font-bold mb-4">전반부 (1~4연)</h4>
                     <p class="text-gray-800 font-medium mb-5 text-lg">비린내에 관한 일반적인 사람들의 생각을 반박함.</p>
@@ -486,12 +486,26 @@
                             <strong class="text-teal-600 w-36 shrink-0 pt-0.5">화자의 관점:</strong>
                             <p class="leading-relaxed">각각의 물고기의 특성에 따라 다르게 나는 다양한 향기</p>
                         </div>
+                        <div class="flex items-start">
+                            <strong class="text-teal-700 w-36 shrink-0 pt-0.5">비린내의 의미:</strong>
+                            <p class="leading-relaxed">정성 들여 화장한 거예요 → 피부를 보호하기 위해 화장을 함(의인법)</p>
+                        </div>
                     </div>
                 </div>
 
+                <!-- 후반부 수정: "향기가 다양한 걸" 부분 추가 -->
                 <div class="bg-white border-l-4 border-teal-600 shadow-sm p-8 mb-10 rounded-r-xl border-y border-r border-slate-100">
                     <h4 class="text-2xl text-teal-800 font-bold mb-4">후반부 (5~6연)</h4>
                     <p class="text-gray-800 font-medium mb-5 text-lg">상대의 입장을 고려하지 않은 말이 '언어폭력'이라는 입장을 밝힘.</p>
+                    
+                    <div class="bg-slate-50 p-6 rounded text-slate-700 space-y-4 text-lg mb-5 border border-teal-100">
+                        <div class="flex items-start">
+                            <span class="text-teal-600 font-bold mr-2 shrink-0">"향기가 다양한 걸"</span>
+                            <span class="mx-2 shrink-0">→</span>
+                            <p class="leading-relaxed">물고기마다 고유한 각각의 특성이 있음</p>
+                        </div>
+                    </div>
+
                     <div class="bg-slate-50 p-6 rounded text-teal-700 font-bold text-2xl italic text-center drop-shadow-sm">
                         "이건, 정말 언어폭력이에요!" - 물고기 일동
                     </div>
@@ -619,7 +633,11 @@
                     <div class="bg-slate-50 p-4 rounded-lg text-sm text-slate-700 text-center mb-6">
                         응답 내역이 선생님께 성공적으로 전송되었음.
                     </div>
-                    <button onclick="closeResult()" class="w-full py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700">확인</button>
+                    <!-- 버튼 레이아웃 수정: 닫기 & 새로운 학생으로 다시 풀기 -->
+                    <div class="flex flex-col gap-3">
+                        <button onclick="closeResult()" class="w-full py-3 bg-slate-200 text-slate-800 rounded-lg font-bold hover:bg-slate-300 transition">창 닫기</button>
+                        <button onclick="resetQuiz()" class="w-full py-3 bg-rose-600 text-white rounded-lg font-bold hover:bg-rose-700 transition">새로운 학생으로 다시 풀기</button>
+                    </div>
                 </div>
             </div>
 
@@ -920,7 +938,7 @@
             document.getElementById('game-msg-desc').innerText = `최종 점수: ${score}점\n다시 도전해보세요!`;
         }
 
-        // --- 형성 평가 로직 (즉각 피드백 디자인 강화) ---
+        // --- 형성 평가 로직 (즉각 피드백 디자인 강화 및 퀴즈 초기화 기능) ---
         const quizData = [
             // [비린내라뇨!] 5문항 (OX 1, 단답 1, 5지 3)
             { type: "ox", q: "1. [비린내라뇨!] 이 시의 말하는 이는 평범한 사람이다.", ans: "X", exp: "이 시의 화자(말하는 이)는 평범한 사람이 아닌 '물고기'임." },
@@ -990,7 +1008,7 @@
             quizContainer.innerHTML += html;
         });
 
-        // 문제 즉시 채점 로직 (피드백 UI 강화)
+        // 문제 즉시 채점 로직
         function checkAnswer(index) {
             if(userAnswersStore[index]) return; 
 
@@ -1130,8 +1148,64 @@
             }
         }
 
+        // 모달 닫기
         function closeResult() {
             document.getElementById('resultModal').classList.add('hidden');
+        }
+
+        // 퀴즈 폼 및 상태 완전 초기화 (새로운 학생이 응시할 수 있도록)
+        function resetQuiz() {
+            // 1. 답안 데이터 초기화
+            userAnswersStore = {};
+
+            // 2. 폼 내 모든 요소(input) 초기화 및 활성화
+            const form = document.getElementById('quizForm');
+            Array.from(form.elements).forEach(el => {
+                el.disabled = false;
+                if (el.type === 'radio') {
+                    el.checked = false;
+                } else if (el.type === 'text' || el.type === 'number') {
+                    el.value = '';
+                }
+            });
+
+            // 3. 인적사항 영역 상태 복구
+            const grade = document.getElementById('qGrade');
+            const classNum = document.getElementById('qClass');
+            const studentNum = document.getElementById('qNum');
+            const name = document.getElementById('qName');
+            
+            [grade, classNum, studentNum, name].forEach(el => {
+                el.readOnly = false;
+                el.classList.remove('bg-slate-100');
+            });
+
+            document.getElementById('startQuizBtn').classList.remove('hidden');
+            document.getElementById('quiz-area').classList.add('hidden');
+            
+            const infoSection = document.getElementById('student-info-section');
+            infoSection.classList.add('border-rose-200');
+            infoSection.classList.remove('border-slate-200', 'bg-slate-50');
+
+            // 4. 문제 블록(해설 및 스타일) 초기화
+            quizData.forEach((q, index) => {
+                let expBox = document.getElementById(`exp-${index}`);
+                expBox.classList.add('hidden');
+                expBox.className = 'hidden mt-5 p-5 rounded-lg text-base font-medium border-l-[6px]';
+                expBox.innerHTML = '';
+
+                let qBlock = document.getElementById(`q-block-${index}`);
+                qBlock.className = 'bg-white p-6 rounded-lg border border-slate-200 shadow-sm relative quiz-item transition-all';
+            });
+
+            // 5. 제출 버튼 영역 복구
+            document.getElementById('submitBtn').classList.remove('hidden');
+            document.getElementById('submit-loading').classList.add('hidden');
+            document.getElementById('submit-error-msg').classList.add('hidden');
+
+            // 6. 결과 모달 닫기 및 상단으로 스크롤 이동
+            document.getElementById('resultModal').classList.add('hidden');
+            document.getElementById('tab-quiz').scrollIntoView({ behavior: 'smooth' });
         }
 
     </script>
