@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-1-1 (2) 문학 속 말하는 이나 보는 이</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans KR', sans-serif; background-color: #f8fafc; }
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Flashcard Styles for Grid - Height Increased Further */
+        .flip-card { background-color: transparent; width: 100%; height: 240px; perspective: 1000px; cursor: pointer; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: left; transition: transform 0.6s; transform-style: preserve-3d; }
+        .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; border-radius: 0.75rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); padding: 1.5rem; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .flip-card-front { background-color: #ffffff; border: 1px solid #e2e8f0; }
+        .flip-card-back { background-color: #fff7ed; border: 1px solid #fed7aa; transform: rotateY(180deg); align-items: flex-start; justify-content: flex-start; overflow-y: auto; }
+        
+        /* Game Canvas */
+        #gameCanvas { background-color: #0f172a; border-radius: 0.5rem; width: 100%; max-width: 800px; height: 400px; margin: 0 auto; display: block; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
+        .btn-nav { transition: all 0.2s; }
+        .btn-nav.active { background-color: #3b82f6; color: white; border-color: #3b82f6; box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.5); }
+    </style>
+</head>
+<body class="text-slate-800 pb-20">
+
+    <!-- Header -->
+    <header class="bg-slate-800 shadow-md py-8 mb-6">
+        <div class="max-w-5xl mx-auto px-4 text-left">
+            <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">문학 속 말하는 이나 보는 이</h1>
+            <p class="text-slate-300 mt-2 text-lg">중학교 국어 2-1 (박현숙) 1-2 소단원 학습</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="max-w-5xl mx-auto px-4 mb-10 flex flex-wrap justify-center gap-3">
+        <button onclick="openTab('tab-concept')" id="btn-tab-concept" class="btn-nav active px-6 py-3 rounded-full border border-slate-300 bg-white text-slate-700 font-medium hover:bg-slate-50 focus:outline-none">개념 정리</button>
+        <button onclick="openTab('tab-train')" id="btn-tab-train" class="btn-nav px-6 py-3 rounded-full border border-slate-300 bg-white text-slate-700 font-medium hover:bg-slate-50 focus:outline-none">기차가 달려 간 곳은</button>
+        <button onclick="openTab('tab-fish')" id="btn-tab-fish" class="btn-nav px-6 py-3 rounded-full border border-slate-300 bg-white text-slate-700 font-medium hover:bg-slate-50 focus:outline-none">비린내라뇨!</button>
+        <button onclick="openTab('tab-vocab')" id="btn-tab-vocab" class="btn-nav px-6 py-3 rounded-full border border-slate-300 bg-white text-slate-700 font-medium hover:bg-slate-50 focus:outline-none">어휘 정리</button>
+        <button onclick="openTab('tab-quiz')" id="btn-tab-quiz" class="btn-nav px-6 py-3 rounded-full border border-slate-300 bg-white text-slate-700 font-medium hover:bg-slate-50 focus:outline-none">형성 평가</button>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4">
+
+        <!-- 1. 개념 정리 -->
+        <section id="tab-concept" class="tab-content active bg-white p-8 rounded-2xl shadow-sm">
+            <h2 class="text-2xl font-bold mb-6 text-blue-600 border-b pb-3">📖 소설과 시의 개념 정리</h2>
+            
+            <div class="space-y-8">
+                <!-- 1) 소설과 시의 개념 비교 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="w-2 h-6 bg-blue-400 rounded"></span>소설과 시의 개념 비교</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse rounded-lg overflow-hidden shadow-sm">
+                            <thead>
+                                <tr class="bg-slate-100 text-slate-800">
+                                    <th class="border p-3 w-1/5 text-center align-middle">구분</th>
+                                    <th class="border p-3 w-2/5 text-center align-middle text-blue-700">소설 (Novel)</th>
+                                    <th class="border p-3 w-2/5 text-center align-middle text-green-700">시 (Poem)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border p-4 font-bold bg-slate-50 text-center align-middle">뜻</td>
+                                    <td class="border p-4 leading-relaxed">작가가 현실에 있음 직한 일을 상상하여 <strong>꾸며</strong> 낸 이야기</td>
+                                    <td class="border p-4 leading-relaxed">글쓴이의 사상과 정서를 <strong>운율</strong>이 있는 언어로 압축하여 표현한 문학</td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-4 font-bold bg-slate-50 text-center align-middle">특징</td>
+                                    <td class="border p-4">
+                                        <ul class="space-y-2">
+                                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">줄글로 이어지는 <strong>산문</strong></span></li>
+                                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">꾸며낸 이야기인 <strong>허구적</strong> 성격</span></li>
+                                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">사건의 흐름이 있는 <strong>서사적</strong> 성격</span></li>
+                                        </ul>
+                                    </td>
+                                    <td class="border p-4">
+                                        <ul class="space-y-2">
+                                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">리듬감이 느껴지는 <strong>운문</strong></span></li>
+                                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">마음을 표현하는 <strong>서정적</strong> 성격</span></li>
+                                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">함축적인 언어 사용</span></li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <hr class="border-gray-200">
+
+                <!-- 2) 소설의 시점 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="w-2 h-6 bg-blue-600 rounded"></span>소설의 시점</h3>
+                    <p class="text-lg leading-relaxed mb-4 text-gray-700 flex items-start">
+                        <strong class="shrink-0 mr-2">시점:</strong>
+                        <span>소설에서 이야기를 서술하여 나가는 방식이나 관점. 즉, <strong class="text-blue-600">누가 누구의 이야기를 하고 있는가(서술자의 위치와 태도)</strong>를 의미함.</span>
+                    </p>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse rounded-lg overflow-hidden shadow-sm text-base">
+                            <thead>
+                                <tr class="bg-blue-50 text-blue-800">
+                                    <th class="border p-3 w-1/4 text-center align-middle">구분</th>
+                                    <th class="border p-3 w-1/4 text-center align-middle">종류</th>
+                                    <th class="border p-3 w-2/4 text-center align-middle">특징 및 대표 예시 작품</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border p-4 font-bold bg-gray-50 text-center align-middle" rowspan="2">1인칭 시점<br><span class="text-sm font-normal text-gray-600 block mt-1">(<strong>작품 속 '나'</strong>가 서술자)</span></td>
+                                    <td class="border p-4 font-semibold text-blue-700 text-center align-middle">1인칭 주인공 시점</td>
+                                    <td class="border p-4 leading-relaxed">
+                                        <strong>'나'가 자신의 이야기</strong>를 독자에게 직접 들려주는 시점.<br>
+                                        <span class="text-gray-500 mt-2 block">예) 김유정 「동백꽃」, 이옥수 「기차가 달려간 곳에는」</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-4 font-semibold text-blue-700 text-center align-middle">1인칭 관찰자 시점</td>
+                                    <td class="border p-4 leading-relaxed">
+                                        작품 안의 <strong>'나'가 주인공을 관찰</strong>하며 이야기를 전달하는 시점.<br>
+                                        <span class="text-gray-500 mt-2 block">예) 주요섭 「사랑손님과 어머니」</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-4 font-bold bg-gray-50 text-center align-middle" rowspan="2">3인칭 시점<br><span class="text-sm font-normal text-gray-600 block mt-1">(<strong>작품 밖</strong> 서술자)</span></td>
+                                    <td class="border p-4 font-semibold text-purple-700 text-center align-middle">전지적 작가 시점</td>
+                                    <td class="border p-4 leading-relaxed">
+                                        서술자가 신처럼 <strong>인물의 심리와 생각까지 모두</strong> 꿰뚫어 보고 전달하는 시점.<br>
+                                        <span class="text-gray-500 mt-2 block">예) 허균 「홍길동전」</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="border p-4 font-semibold text-purple-700 text-center align-middle">작가 관찰자 시점</td>
+                                    <td class="border p-4 leading-relaxed">
+                                        서술자가 외부에서 <strong>관찰한 인물의 말과 행동만</strong>을 객관적으로 전달하는 시점.<br>
+                                        <span class="text-gray-500 mt-2 block">예) 황순원 「소나기」</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <hr class="border-gray-200">
+
+                <!-- 3) 시의 화자 -->
+                <div>
+                    <h3 class="text-xl font-bold mb-3 flex items-center gap-2"><span class="w-2 h-6 bg-green-500 rounded"></span>시의 화자</h3>
+                    <p class="text-lg leading-relaxed text-gray-700 mb-3 flex items-start">
+                        <strong class="shrink-0 mr-2">시의 화자(말하는 이):</strong> 
+                        <span>시 속에서 <strong class="text-green-600">독자에게 이야기를 전달하는 사람 혹은 주체</strong>를 뜻함.</span>
+                    </p>
+                    <div class="bg-green-50 p-6 rounded-lg text-gray-800 text-lg">
+                        <ul class="space-y-3">
+                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">화자는 시인 자신일 수도 있지만, <strong>시인이 자신의 생각과 느낌을 효과적으로 전달하기 위해 내세운 허구적 대리인</strong>인 경우가 많음.</span></li>
+                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">화자에 따라 시의 <strong>분위기, 어조, 주제</strong>가 크게 달라짐.</span></li>
+                            <li class="flex items-start"><span class="shrink-0 mr-2">•</span><span class="leading-relaxed">예: 「비린내라뇨!」에서 화자는 사람이 아닌 <strong>'물고기'</strong>임.</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 기차가 달려 간 곳은 -->
+        <section id="tab-train" class="tab-content bg-white p-8 rounded-2xl shadow-sm">
+            <h3 class="font-bold text-xl mb-3">제재 개관</h3>
+            <div class="overflow-x-auto mb-10">
+                <table class="w-full text-left border-collapse text-lg">
+                    <tbody>
+                        <tr class="border-b"><th class="bg-indigo-50 p-4 w-1/5 border-r text-center align-middle">갈래</th><td class="p-4">현대 소설, 단편 소설, 청소년 소설</td></tr>
+                        <tr class="border-b"><th class="bg-indigo-50 p-4 border-r text-center align-middle">배경</th><td class="p-4">시간적: 현대 / 공간적: 영천과 서울</td></tr>
+                        <tr class="border-b"><th class="bg-indigo-50 p-4 border-r text-center align-middle">시점</th><td class="p-4 font-bold text-indigo-600">1인칭 주인공 시점</td></tr>
+                        <tr class="border-b"><th class="bg-indigo-50 p-4 border-r text-center align-middle">주제</th><td class="p-4">힘든 삶을 버티게 하는 가족이라는 희망</td></tr>
+                        <tr><th class="bg-indigo-50 p-4 border-r text-center align-middle">특징</th>
+                            <td class="p-4 leading-relaxed">
+                                <ul class="space-y-2 text-slate-800">
+                                    <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-600 font-bold">•</span><span class="leading-relaxed">사건 진행에 따른 인물의 심리 변화가 뚜렷함.</span></li>
+                                    <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-600 font-bold">•</span><span class="leading-relaxed">'현재-과거-현재'의 <strong>역순행적 구성</strong>을 취함.</span></li>
+                                    <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-600 font-bold">•</span><span class="font-medium text-indigo-800">청소년을 말하는 이로 설정하여 밝고 따뜻한 분위기를 조성하고 주제를 강조함.</span></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 구성 단계 -->
+            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mb-8">
+                <h3 class="font-bold text-xl mb-5 text-indigo-700">📖 구성 단계</h3>
+                <div class="space-y-4 text-lg">
+                    <div class="flex flex-col md:flex-row gap-4 bg-white p-4 rounded-lg border border-indigo-100 shadow-sm items-center md:items-start">
+                        <div class="bg-indigo-100 text-indigo-800 font-black py-2 px-4 rounded-lg shrink-0 w-56 text-center">발단(26:05~27:04)</div>
+                        <div class="flex-1 py-1 leading-relaxed text-slate-700">'나'는 교실에서 난생처음 기차가 탔던 그날을 떠올림. (현재)</div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-4 bg-white p-4 rounded-lg border border-indigo-100 shadow-sm items-center md:items-start">
+                        <div class="bg-indigo-100 text-indigo-800 font-black py-2 px-4 rounded-lg shrink-0 w-56 text-center">전개(27:05~33:20)</div>
+                        <div class="flex-1 py-1 leading-relaxed text-slate-700">'나'는 고모네 집에서 무작정 기차를 타고 아빠가 살고 있는 서울로 향함. (과거)</div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-4 bg-white p-4 rounded-lg border border-indigo-100 shadow-sm items-center md:items-start">
+                        <div class="bg-indigo-100 text-indigo-800 font-black py-2 px-4 rounded-lg shrink-0 w-56 text-center">위기(34:01~37:09)</div>
+                        <div class="flex-1 py-1 leading-relaxed text-slate-700">'나'는 예상과 달리 고생스럽게 살고 있는 아빠의 모습에 속상해함. (과거)</div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-4 bg-white p-4 rounded-lg border border-indigo-100 shadow-sm items-center md:items-start">
+                        <div class="bg-indigo-100 text-indigo-800 font-black py-2 px-4 rounded-lg shrink-0 w-56 text-center">절정(37:10~43:19)</div>
+                        <div class="flex-1 py-1 leading-relaxed text-slate-700">'나'는 꿈을 잃지 않는 아빠를 보며 희망을 느끼고 집으로 돌아옴. (과거)</div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-4 bg-white p-4 rounded-lg border border-indigo-100 shadow-sm items-center md:items-start">
+                        <div class="bg-indigo-100 text-indigo-800 font-black py-2 px-4 rounded-lg shrink-0 w-56 text-center">결말(44:01~끝)</div>
+                        <div class="flex-1 py-1 leading-relaxed text-slate-700">'나'는 아빠를 생각하며 생라면을 씹음. (현재)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 구성 단계의 특징 (시간의 흐름 추가) -->
+            <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100 mb-8">
+                <h3 class="font-bold text-xl mb-6 text-indigo-800 flex items-start">
+                    <span class="shrink-0 w-8">💡</span>
+                    <span>구성 단계의 특징 (역순행적 구성)</span>
+                </h3>
+                
+                <div class="ml-[2.2rem] space-y-8">
+                    <!-- 시간의 흐름 -->
+                    <div class="flex items-start">
+                        <span class="text-indigo-500 font-bold text-xl mr-3 shrink-0 mt-1">•</span>
+                        <div class="w-full">
+                            <strong class="text-lg text-slate-800 block mb-4 mt-1">시간의 흐름</strong>
+                            <div class="flex flex-col md:flex-row items-center justify-center gap-4 text-slate-700 font-medium">
+                                <div class="bg-white p-4 rounded-lg border border-indigo-200 shadow-sm w-full md:flex-1 flex flex-col items-center justify-center text-center">
+                                    <span class="block text-indigo-800 font-black mb-2 text-lg w-full text-center">현재</span>
+                                    <span class="block text-base leading-relaxed w-full text-center">개학 후, 교실(영천)</span>
+                                </div>
+                                <div class="text-indigo-500 font-black text-2xl transform rotate-90 md:rotate-0">→</div>
+                                <div class="bg-white p-4 rounded-lg border border-indigo-200 shadow-sm w-full md:flex-1 flex flex-col items-center justify-center text-center">
+                                    <span class="block text-indigo-800 font-black mb-2 text-lg w-full text-center">과거</span>
+                                    <span class="block text-base leading-relaxed w-full text-center">여름 방학<br>(동대구 → 서울 → 영천)</span>
+                                </div>
+                                <div class="text-indigo-500 font-black text-2xl transform rotate-90 md:rotate-0">→</div>
+                                <div class="bg-white p-4 rounded-lg border border-indigo-200 shadow-sm w-full md:flex-1 flex flex-col items-center justify-center text-center">
+                                    <span class="block text-indigo-800 font-black mb-2 text-lg w-full text-center">현재</span>
+                                    <span class="block text-base leading-relaxed w-full text-center">개학 후, 교실(영천)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 역순행적 구성의 효과 -->
+                    <div class="flex items-start">
+                        <span class="text-indigo-500 font-bold text-xl mr-3 shrink-0 mt-1">•</span>
+                        <div>
+                            <strong class="text-lg text-slate-800 block mb-3 mt-1">역순행적 구성의 효과</strong>
+                            <div class="space-y-3 mt-3">
+                                <div class="flex items-start">
+                                    <span class="text-indigo-500 font-bold text-lg mr-3 shrink-0 mt-0.5">•</span>
+                                    <p class="text-lg text-slate-700 leading-relaxed">과거의 사건이 현재의 '나'에게 미친 영향을 강조함.</p>
+                                </div>
+                                <div class="flex items-start">
+                                    <span class="text-indigo-500 font-bold text-lg mr-3 shrink-0 mt-0.5">•</span>
+                                    <p class="text-lg text-slate-700 leading-relaxed">독자의 흥미를 유발하고 궁금증을 불러일으켜 작품에 더욱 몰입하게 함.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 이 소설의 서술자 -->
+            <div class="bg-white p-6 rounded-xl border border-slate-200 mb-8 shadow-sm">
+                <h3 class="font-bold text-xl mb-5 text-indigo-800 flex items-center border-b border-slate-100 pb-3">
+                    <span class="shrink-0 w-8">👀</span>
+                    <span>이 소설의 서술자: <strong class="text-indigo-600 text-2xl ml-2">나(주인공) → 1인칭 주인공 시점</strong></span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+                    <div class="bg-indigo-50 border border-indigo-100 p-5 rounded-lg shadow-sm">
+                        <h4 class="font-black text-lg text-indigo-800 mb-3 border-b border-indigo-200 pb-2">나의 처한 상황</h4>
+                        <ul class="space-y-3 text-slate-700 text-lg">
+                            <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-500 font-bold">•</span><span class="leading-relaxed">엄마가 돌아가신 후 아빠가 돈을 벌러 서울로 떠남.</span></li>
+                            <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-500 font-bold">•</span><span class="leading-relaxed">할머니, 여동생과 함께 영천에 살고 있음.</span></li>
+                        </ul>
+                    </div>
+                    <div class="bg-indigo-50 border border-indigo-100 p-5 rounded-lg shadow-sm">
+                        <h4 class="font-black text-lg text-indigo-800 mb-3 border-b border-indigo-200 pb-2">나의 성격</h4>
+                        <ul class="space-y-3 text-slate-700 text-lg">
+                            <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-500 font-bold">•</span><span class="leading-relaxed">표현에 서툴지만 가족을 사랑하는 마음이 크고 속이 깊음.</span></li>
+                            <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-500 font-bold">•</span><span class="leading-relaxed">동생을 돌보아야 한다는 책임감이 강함.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-indigo-50 border border-indigo-100 p-5 rounded-lg shadow-sm">
+                    <h4 class="font-black text-lg text-indigo-800 mb-3 border-b border-indigo-200 pb-2">나를 서술자로 한 이유</h4>
+                    <ul class="space-y-3 text-slate-700 text-lg">
+                        <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-500 font-bold">•</span><span class="leading-relaxed">아빠를 굳게 믿고 사랑하는 '나'가 이야기를 전달하여 <strong>밝고 따뜻한 분위기</strong>를 조성함.</span></li>
+                        <li class="flex items-start"><span class="shrink-0 mr-2 text-indigo-500 font-bold">•</span><span class="leading-relaxed">자신의 속마음을 고백적으로 드러내어 <strong>'가족이라는 희망'의 주제를 효과적으로 강조</strong>함.</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 말하는 이의 태도 변화 -->
+            <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 mb-8">
+                <h3 class="font-bold text-xl mb-5 text-indigo-700">👤 말하는 이('나')의 태도 변화</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-6 items-center text-lg text-slate-800">
+                    <!-- 과거 박스 -->
+                    <div class="flex flex-col p-6 bg-white border border-slate-300 rounded-lg shadow-sm h-full relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-slate-400"></div>
+                        <strong class="text-slate-600 text-center text-xl border-b pb-3 mb-4">[과거]</strong>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-start">
+                                <span class="text-slate-400 mr-2 font-bold shrink-0">•</span>
+                                <p class="leading-relaxed">사촌 동생과 자신을 비교하는 할머니에게 <strong>서운함</strong>을 느낌.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-slate-400 mr-2 font-bold shrink-0">•</span>
+                                <p class="leading-relaxed">전화할 때마다 바쁘다고, 미안하다고 하며 가족을 보러 오지 않는 아빠를 <strong>원망하면서도 그리워함.</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 중앙 화살표 -->
+                    <div class="text-center text-indigo-400 font-bold text-4xl transform rotate-90 md:rotate-0 drop-shadow-sm">
+                        →
+                    </div>
+                    
+                    <!-- 현재 박스 -->
+                    <div class="flex flex-col p-6 bg-white border border-indigo-200 rounded-lg shadow-sm h-full relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-indigo-500"></div>
+                        <strong class="text-indigo-600 text-center text-xl border-b border-indigo-100 pb-3 mb-4">[현재]</strong>
+                        <div class="flex flex-col gap-4">
+                            <div class="flex items-start">
+                                <span class="text-indigo-400 mr-2 font-bold shrink-0">•</span>
+                                <p class="leading-relaxed">자신과 연서를 아끼는 할머니의 <strong>깊은 사랑</strong>을 깨닫게 됨.</p>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-indigo-400 mr-2 font-bold shrink-0">•</span>
+                                <p class="leading-relaxed">아빠를 <strong>이해하고, 아빠가 지켜갈 희망을 응원</strong>하게 됨.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 등장 인물의 특징과 성격 표 -->
+            <div class="mb-8">
+                <h3 class="font-bold text-xl mb-4 text-slate-800">👥 등장 인물의 특징과 성격</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse border border-slate-300 rounded-lg overflow-hidden shadow-sm text-lg">
+                        <thead>
+                            <tr class="bg-indigo-100 text-indigo-900">
+                                <th class="border border-slate-300 p-4 text-center align-middle w-1/5">인물</th>
+                                <th class="border border-slate-300 p-4 text-center align-middle w-2/5">본문에 나타난 내용</th>
+                                <th class="border border-slate-300 p-4 text-center align-middle w-2/5">성격</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="border border-slate-300 p-4 font-bold text-indigo-700 text-center align-middle">한연우('나')</td>
+                                <td class="border border-slate-300 p-4 text-slate-700 leading-relaxed">할머니 몰래 기차를 타고 서울의 아빠를 찾아감.<br>동생 연서를 챙기고 아빠를 마음속으로 묵묵히 응원함.</td>
+                                <td class="border border-slate-300 p-4 text-slate-700 leading-relaxed">표현에 서툴지만 가족을 깊이 사랑함.<br>동생을 챙기는 등 책임감이 강함.</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-4 font-bold text-indigo-700 text-center align-middle">아빠</td>
+                                <td class="border border-slate-300 p-4 text-slate-700 leading-relaxed">고단한 삶을 견디며 논밭과 트랙터를 사기 위해 좁은 쪽방에서 생활하며 일함.</td>
+                                <td class="border border-slate-300 p-4 text-slate-700 leading-relaxed">책임감과 생활력이 강함.<br>가족의 행복을 위해 헌신하며 희망을 잃지 않음.</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-4 font-bold text-indigo-700 text-center align-middle">할머니</td>
+                                <td class="border border-slate-300 p-4 text-slate-700 leading-relaxed">손자와 손녀에게 겉으로는 엄하고 퉁명스럽게 대하지만 속으로는 늘 안쓰러워함.</td>
+                                <td class="border border-slate-300 p-4 text-slate-700 leading-relaxed">손자, 손녀를 깊이 사랑함.<br>아이들이 바르게 성장하기를 바라는 마음이 큼.</td>
+                            </tr>
+                            <tr>
+                                <td class="border border-slate-300 p-4 font-bold text-indigo-700 text-center align-middle">한연서</td>
+                                <td class="border border-slate-300 p-4 text-slate-700 leading-relaxed">나이에 비해 떼를 쓰지 않고 가족들의 상황을 이해하며 오빠를 잘 따름.</td>
+                                <td class="border border-slate-300 p-4 text-slate-700 leading-relaxed">의젓함.<br>가족을 배려하고 생각하는 따뜻한 마음을 지님.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 소재의 의미 -->
+            <div class="mb-6">
+                <h3 class="font-bold text-xl mb-4 text-slate-800">💡 소재의 의미</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- 오만 원권 (나, 할머니, 고모) -->
+                    <div class="bg-white border border-indigo-200 p-6 rounded-lg shadow-sm md:col-span-2">
+                        <h4 class="font-black text-xl text-indigo-700 mb-4 border-b border-indigo-100 pb-2">오만 원권 (오만 원권 두 장)</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                            <div class="bg-indigo-50 border border-indigo-100 p-5 rounded-lg shadow-sm flex flex-col">
+                                <strong class="text-indigo-800 text-xl mb-3 text-center border-b border-indigo-200 pb-2">나</strong>
+                                <p class="text-slate-700 text-lg leading-relaxed flex-1 text-center">아빠가 있는 서울로 무작정 떠날 수 있게 해 준 수단(기차표 값)이자 계기임.</p>
+                            </div>
+                            <div class="bg-indigo-50 border border-indigo-100 p-5 rounded-lg shadow-sm flex flex-col">
+                                <strong class="text-indigo-800 text-xl mb-3 text-center border-b border-indigo-200 pb-2">할머니</strong>
+                                <p class="text-slate-700 text-lg leading-relaxed flex-1 text-center">겉으로는 무뚝뚝하지만 속으로는 손자를 깊이 아끼고 사랑하는 따뜻한 마음임.</p>
+                            </div>
+                            <div class="bg-indigo-50 border border-indigo-100 p-5 rounded-lg shadow-sm flex flex-col">
+                                <strong class="text-indigo-800 text-xl mb-3 text-center border-b border-indigo-200 pb-2">고모</strong>
+                                <p class="text-slate-700 text-lg leading-relaxed flex-1 text-center">부모와 떨어져 지내는 조카를 안쓰러워하며 살뜰히 챙겨 주는 애정과 배려임.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white border border-indigo-200 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-black text-xl text-indigo-700 mb-3">생라면</h4>
+                        <p class="text-slate-700 text-lg leading-relaxed">와작와작 씹는 행위를 통해 굳세게 희망을 키워가는 아빠를 속으로 진심을 다해 응원하고 다짐하는 매개체임.</p>
+                    </div>
+                    <div class="bg-white border border-indigo-200 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-black text-xl text-indigo-700 mb-3">논밭, 트랙터</h4>
+                        <p class="text-slate-700 text-lg leading-relaxed">아빠가 서울에서 고생하며 일하는 목적이자 언젠가 가족과 다시 함께 살겠다는 아빠의 희망을 의미함.</p>
+                    </div>
+                    <div class="bg-white border border-indigo-200 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-black text-xl text-indigo-700 mb-3">쪽방</h4>
+                        <p class="text-slate-700 text-lg leading-relaxed">아빠가 서울에서 겪고 있는 고단하고 열악한 삶과 현실을 시각적이고 단적으로 보여주는 공간임.</p>
+                    </div>
+                    <div class="bg-white border border-indigo-200 p-6 rounded-lg shadow-sm">
+                        <h4 class="font-black text-xl text-indigo-700 mb-3">꽃이나 나무와 아빠 자신을 비교</h4>
+                        <p class="text-slate-700 text-lg leading-relaxed">아빠가 '나'를 안심시키기 위해 고생하는 자신의 모습을 꽃이나 나무를 새 땅(서울)에 옮겨 심는 일에 긍정적으로 비유함.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 비린내라뇨! -->
+        <section id="tab-fish" class="tab-content bg-white p-8 rounded-2xl shadow-sm">
+            <!-- 물고기 이모티콘 🐟 삭제 -->
+            <h2 class="text-3xl font-bold mb-6 text-teal-600 border-b pb-3">비린내라뇨!</h2>
+            
+            <!-- 제목 프리뷰 -->
+            <h3 class="font-bold text-xl mb-4 text-slate-800">제목 프리뷰</h3>
+            <div class="bg-teal-50 p-6 rounded-xl border border-teal-100 mb-10 flex flex-col md:flex-row gap-6 items-center">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-teal-200 flex-1 w-full">
+                    <h4 class="text-teal-800 font-bold text-lg mb-3 border-b border-teal-100 pb-2">비린내의 사전적 의미</h4>
+                    <p class="text-slate-700 text-lg leading-relaxed">날콩이나 물고기, 동물의 피 등에서 나는 역겹고 매스꺼운 냄새.</p>
+                </div>
+                <div class="text-teal-500 font-bold text-3xl hidden md:block drop-shadow-sm">➡</div>
+                <div class="bg-teal-600 p-6 rounded-lg shadow-sm text-white flex-1 w-full text-center flex items-center justify-center min-h-[100px]">
+                    <p class="text-xl font-bold leading-relaxed">비린내에 관해<br>다르게 생각해 볼 수 있을까?</p>
+                </div>
+            </div>
+
+            <h3 class="font-bold text-xl mb-6">제재 개관</h3>
+            <div class="overflow-x-auto mb-10">
+                <table class="w-full text-left border-collapse text-lg">
+                    <tbody>
+                        <tr class="border-b"><th class="bg-teal-50 p-4 w-1/4 border-r text-center align-middle">갈래</th><td class="p-4">현대시, 자유시</td></tr>
+                        <tr class="border-b"><th class="bg-teal-50 p-4 border-r text-center align-middle">성격</th><td class="p-4">비판적, 교훈적</td></tr>
+                        <tr class="border-b"><th class="bg-teal-50 p-4 border-r text-center align-middle">말하는 이</th><td class="p-4 font-bold text-teal-600">물고기</td></tr>
+                        <tr class="border-b"><th class="bg-teal-50 p-4 border-r text-center align-middle">주제</th><td class="p-4">자신의 관점으로 다른 대상을 함부로 판단하지 말자</td></tr>
+                        <!-- 주제 아래 특징 행 추가 (2줄 배열) -->
+                        <tr>
+                            <th class="bg-teal-50 p-4 border-r text-center align-middle">특징</th>
+                            <td class="p-4 leading-relaxed">
+                                <ul class="space-y-2 text-slate-800">
+                                    <li class="flex items-start">
+                                        <span class="text-teal-500 font-bold text-lg mr-3 shrink-0 mt-0.5">•</span>
+                                        <p class="text-lg leading-relaxed">물고기의 관점으로 주제를 재치있게 표현함.</p>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-teal-500 font-bold text-lg mr-3 shrink-0 mt-0.5">•</span>
+                                        <p class="text-lg leading-relaxed">말하는 이가 독자에게 말을 거는 것처럼 이야기함.</p>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="font-bold text-xl mb-4 text-slate-800">시의 구조와 내용</h3>
+            <div class="ml-[3.4rem]">
+                <div class="bg-white border-l-4 border-teal-400 shadow-sm p-8 mb-6 rounded-r-xl border-y border-r border-slate-100">
+                    <h4 class="text-2xl text-teal-700 font-bold mb-4">전반부 (1~4연)</h4>
+                    <p class="text-gray-800 font-medium mb-5 text-lg">비린내에 관한 일반적인 사람들의 생각을 반박함.</p>
+                    <div class="bg-slate-50 p-6 rounded text-slate-700 space-y-4 text-lg">
+                        <div class="flex items-start">
+                            <strong class="text-slate-500 w-36 shrink-0 pt-0.5">일반적 관점:</strong>
+                            <p class="leading-relaxed">물고기에서 나는 비위가 상하는 역겨운 냄새</p>
+                        </div>
+                        <div class="flex items-start">
+                            <strong class="text-teal-600 w-36 shrink-0 pt-0.5">화자의 관점:</strong>
+                            <p class="leading-relaxed">각각의 물고기의 특성에 따라 다르게 나는 다양한 향기</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border-l-4 border-teal-600 shadow-sm p-8 mb-10 rounded-r-xl border-y border-r border-slate-100">
+                    <h4 class="text-2xl text-teal-800 font-bold mb-4">후반부 (5~6연)</h4>
+                    <p class="text-gray-800 font-medium mb-5 text-lg">상대의 입장을 고려하지 않은 말이 '언어폭력'이라는 입장을 밝힘.</p>
+                    <div class="bg-slate-50 p-6 rounded text-teal-700 font-bold text-2xl italic text-center drop-shadow-sm">
+                        "이건, 정말 언어폭력이에요!" - 물고기 일동
+                    </div>
+                </div>
+            </div>
+
+            <!-- 말하는 이 설정과 효과 -->
+            <div class="mb-2">
+                <h3 class="font-bold text-teal-800 text-xl mb-5 flex items-start">
+                    <span class="w-9 shrink-0">💡</span>
+                    <span>말하는 이 설정과 효과</span>
+                </h3>
+                
+                <div class="ml-[2.25rem] bg-teal-50 p-8 rounded-xl border border-teal-100">
+                    <ul class="space-y-5 text-lg text-slate-800">
+                        <li class="flex items-start">
+                            <span class="text-teal-500 mr-3 mt-1 font-bold shrink-0">•</span>
+                            <p class="leading-relaxed">이 시는 사람이 아닌 <strong>'물고기'</strong>를 말하는 이로 설정함.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-teal-500 mr-3 mt-1 font-bold shrink-0">•</span>
+                            <p class="leading-relaxed">이를 통해 평소 인간의 입장에서 당연하다고 생각했던 것들(비린내는 나쁜 냄새다)에 관해 <strong>다른 관점에서 생각</strong>해 볼 수 있게 함.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-teal-500 mr-3 mt-1 font-bold shrink-0">•</span>
+                            <p class="leading-relaxed">대상이 되는 사물의 입장이 되어봄으로써 발상의 전환을 이끌어내고 <strong>참신한 깨달음</strong>을 줌.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 어휘 정리 & 게임 -->
+        <section id="tab-vocab" class="tab-content bg-white p-8 rounded-2xl shadow-sm">
+            <div class="flex justify-between items-center mb-6 border-b pb-3">
+                <h2 class="text-2xl font-bold text-orange-600">📝 어휘 학습 & 슈팅 게임</h2>
+                <div class="flex gap-2">
+                    <button onclick="vocabMode('learn')" id="btn-vocab-learn" class="px-4 py-1 rounded bg-orange-500 text-white font-bold text-sm">학습 모드</button>
+                    <button onclick="vocabMode('game')" id="btn-vocab-game" class="px-4 py-1 rounded bg-slate-200 text-slate-600 font-bold text-sm">게임 모드</button>
+                </div>
+            </div>
+
+            <!-- 학습 모드 (3열 10행 플래시카드 뷰 - 글자 크기 대폭 확대 및 3열 고정) -->
+            <div id="vocab-learning-area" class="block">
+                <div class="text-center mb-6">
+                    <p class="text-slate-500 text-base font-medium">단어 카드를 클릭하여 뜻을 확인하고 게임에 도전하세요!</p>
+                </div>
+                
+                <!-- grid-cols-3 속성으로 3열 강제 유지, 30개 단어이므로 자연스럽게 10행이 됩니다. -->
+                <div id="vocab-grid-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                    <!-- Javascript로 단어 데이터가 삽입됨 -->
+                </div>
+            </div>
+
+            <!-- 게임 모드 -->
+            <div id="vocab-game-area" class="hidden text-center">
+                <div class="mb-2 bg-orange-50 py-3 px-4 rounded-lg inline-block w-full max-w-3xl border border-orange-200 shadow-sm">
+                    <p class="text-xs text-orange-500 font-bold mb-1">TARGET MEANING</p>
+                    <p id="target-meaning" class="text-base md:text-lg font-bold text-slate-800 min-h-[40px] flex items-center justify-center">게임을 시작하세요!</p>
+                </div>
+                
+                <div class="flex justify-between max-w-3xl mx-auto mb-2 px-2 text-sm font-bold text-slate-600">
+                    <div>SCORE: <span id="game-score" class="text-orange-600 text-lg">0</span></div>
+                    <div>LIVES: <span id="game-lives" class="text-red-500 text-lg">♥♥♥</span></div>
+                </div>
+
+                <div class="relative">
+                    <canvas id="gameCanvas" width="800" height="400"></canvas>
+                    <div id="game-overlay" class="absolute inset-0 bg-slate-900/85 flex flex-col items-center justify-center rounded-lg">
+                        <h3 id="game-msg-title" class="text-3xl text-white font-bold mb-4">어휘 슈팅 게임</h3>
+                        <p id="game-msg-desc" class="text-slate-300 mb-6 text-sm leading-relaxed">좌우 방향키(◀,▶)로 이동, 스페이스바(SPACE)로 발사!<br>위에 제시된 뜻에 맞는 단어를 쏘세요.</p>
+                        <button onclick="startGame()" class="px-8 py-3 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded-full text-lg shadow-lg transform transition hover:scale-105">게임 시작</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 형성 평가 -->
+        <section id="tab-quiz" class="tab-content bg-white p-8 rounded-2xl shadow-sm">
+            <h2 class="text-2xl font-bold mb-6 text-rose-600 border-b pb-3">💯 형성 평가 (15문항)</h2>
+            
+            <form id="quizForm" class="space-y-8" onsubmit="submitQuiz(event)">
+                
+                <!-- 인적 사항 -->
+                <div id="student-info-section" class="bg-rose-50 p-6 rounded-xl border border-rose-200 shadow-sm transition-all duration-300">
+                    <h3 class="font-bold text-rose-800 mb-4 flex items-center gap-2"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg> 인적 사항을 입력하세요</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">학년</label><input type="number" id="qGrade" required class="w-full p-3 border border-slate-300 rounded focus:ring-2 focus:ring-rose-400 outline-none" min="1" max="3"></div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">반</label><input type="number" id="qClass" required class="w-full p-3 border border-slate-300 rounded focus:ring-2 focus:ring-rose-400 outline-none" min="1" max="20"></div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">번호</label><input type="number" id="qNum" required class="w-full p-3 border border-slate-300 rounded focus:ring-2 focus:ring-rose-400 outline-none" min="1" max="40"></div>
+                        <div><label class="block text-sm font-bold text-slate-700 mb-1">이름</label><input type="text" id="qName" required class="w-full p-3 border border-slate-300 rounded focus:ring-2 focus:ring-rose-400 outline-none"></div>
+                    </div>
+                    <div class="text-center">
+                        <button type="button" id="startQuizBtn" onclick="startQuiz()" class="px-8 py-3 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg shadow-md transition-colors w-full md:w-auto">평가 시작하기</button>
+                    </div>
+                </div>
+
+                <!-- 문제 영역 -->
+                <div id="quiz-area" class="hidden space-y-6">
+                    <div id="quiz-questions-container" class="space-y-6">
+                        <!-- Javascript로 렌더링됨 -->
+                    </div>
+
+                    <div class="text-center pt-6 border-t mt-8">
+                        <!-- 에러 메시지 표출 영역 -->
+                        <div id="submit-error-msg" class="hidden text-rose-600 font-bold mb-4 bg-rose-50 p-3 rounded-lg border border-rose-200"></div>
+                        
+                        <button type="submit" id="submitBtn" class="px-10 py-4 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-lg text-lg shadow-lg w-full md:w-auto">제출하고 결과보기</button>
+                        <div id="submit-loading" class="hidden text-rose-600 font-bold mt-4 animate-pulse">결과를 전송 중입니다...</div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- 결과 모달 -->
+            <div id="resultModal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50">
+                <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all">
+                    <div class="text-center mb-6">
+                        <div class="text-5xl mb-2" id="result-emoji">🎉</div>
+                        <h3 class="text-2xl font-bold text-slate-800">평가 결과</h3>
+                    </div>
+                    <div class="text-center mb-6">
+                        <p class="text-gray-500 mb-1" id="result-name"></p>
+                        <p class="text-4xl font-black text-rose-600" id="result-score">0점</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-lg text-sm text-slate-700 text-center mb-6">
+                        응답 내역이 선생님께 성공적으로 전송되었음.
+                    </div>
+                    <button onclick="closeResult()" class="w-full py-3 bg-slate-800 text-white rounded-lg font-bold hover:bg-slate-700">확인</button>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script>
+        // --- 탭 전환 로직 ---
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.btn-nav').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-500', 'text-white');
+                btn.classList.add('bg-white', 'text-slate-700');
+            });
+            document.getElementById(tabId).classList.add('active');
+            
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.classList.add('active', 'bg-blue-500', 'text-white');
+            activeBtn.classList.remove('bg-white', 'text-slate-700');
+        }
+
+        // --- 어휘 데이터 (30개) ---
+        const vocabData = [
+            {w:"관점", m:"사물이나 현상을 관찰할 때, 그 사람이 보고 생각하는 태도나 방향", e:"작가가 대상을 어떤 관점으로 보았는지 짐작해 보자."},
+            {w:"말하는 이", m:"문학 작품에서 독자에게 이야기를 전달하는 사람", e:"이 시의 말하는 이는 사람이 아닌 동물이다."},
+            {w:"보는 이", m:"문학 작품에서 인물이나 사건, 배경을 관찰하는 사람", e:"문학 작품에서 보는 이에 따라 작품의 분위기가 달라진다."},
+            {w:"객지", m:"자기 집을 멀리 떠나 임시로 있는 곳", e:"고향을 떠나 객지에서 맞이하는 명절은 쓸쓸했다."},
+            {w:"기함", m:"갑작스레 몹시 놀라거나 아프거나 하여 소리를 지르면서 넋을 잃음", e:"참혹한 광경에 기함을 할 듯이 놀랐다."},
+            {w:"날이 서다", m:"성격이나 표현, 판단력 등이 날카롭다", e:"그의 말은 날이 서고 조리가 분명하다."},
+            {w:"미심쩍다", m:"분명하지 못하여 마음이 놓이지 않는 데가 있다", e:"그의 말이 조금 미심쩍기는 했으나 믿기로 했다."},
+            {w:"방도", m:"어떤 일을 하거나 문제를 풀어 가기 위한 방법과 도리", e:"일을 수습할 방도를 마련해 보자."},
+            {w:"부산", m:"급하게 서두르거나 시끄럽게 떠들어 어수선함", e:"아침부터 여행을 간다고 부산을 떨고 있다."},
+            {w:"새옹지마", m:"인생의 길흉화복은 변화가 많아 예측하기 어렵다는 말", e:"이번 실패가 새옹지마가 될지 누가 알겠니."},
+            {w:"서술자", m:"소설에서 어떤 내용을 일정한 기준이나 관점에 따라 말하는 사람", e:"서술자의 위치에 따라 시점이 결정된다."},
+            {w:"시점", m:"소설에서 이야기를 서술하여 나가는 방식이나 관점", e:"이 소설은 1인칭 주인공 시점으로 쓰였다."},
+            {w:"화자", m:"시에서 이야기를 하는 사람 (말하는 이)", e:"화자의 정서가 잘 드러난 시이다."},
+            {w:"개선장군", m:"어떤 일에 성공하여 의기양양한 사람을 비유하는 말", e:"마치 개선장군처럼 위풍당당하게 걸어왔다."},
+            {w:"불퉁하다", m:"퉁명스럽고 무뚝뚝하다", e:"심통이 난 듯 불퉁하게 대답했다."},
+            {w:"알곡", m:"쭉정이나 잡것이 섞이지 아니한 꽉 찬 곡식", e:"알곡만을 골라 밥을 지었다."},
+            {w:"열불", m:"매우 흥분하거나 화가 난 감정을 비유적으로 이르는 말", e:"시치미 떼는 동생 모습에 열불이 났다."},
+            {w:"옹골지다", m:"실속이 있게 속이 꽉 차 있다", e:"옥수수가 옹골지게 여물었다."},
+            {w:"일렁이다", m:"크고 긴 물건 등이 이리저리 크게 흔들리다", e:"파도가 일렁이는 바다를 보았다."},
+            {w:"뙤약볕", m:"여름날에 강하게 내리쬐는 몹시 뜨거운 볕", e:"뙤약볕 아래서 땀을 뻘뻘 흘렸다."},
+            {w:"동동걸음", m:"발을 가까이 자주 떼며 급히 걷는 걸음", e:"지각할까 봐 동동걸음을 쳤다."},
+            {w:"악착같이", m:"매우 모질고 끈덕지게", e:"시험에 합격하기 위해 악착같이 공부했다."},
+            {w:"별반", m:"따로 별다르게", e:"이전 모델과 별반 다르지 않다."},
+            {w:"연립", m:"여럿이 어울려 섬. 또는 그렇게 서서 하나의 형태로 만듦", e:"연립 주택에 살고 있다."},
+            {w:"계량기", m:"수량을 헤아리는 데 쓰는 기구", e:"수도 계량기를 확인했다."},
+            {w:"모퉁이", m:"구부러지거나 꺾어져 돌아간 자리", e:"골목 모퉁이를 돌아서자 집이 보였다."},
+            {w:"사정", m:"어떤 일의 형편이나 까닭을 남에게 말하고 간청함", e:"선생님께 사정을 이야기하고 용서를 구했다."},
+            {w:"조", m:"'말투'나 '태도' 등의 뜻을 나타내는 말", e:"명령하는 조로 말하지 마라."},
+            {w:"밑반찬", m:"만들어서 오래 두고 언제나 내어 먹을 수 있는 반찬", e:"주말에 일주일치 밑반찬을 만들었다."},
+            {w:"살림하다", m:"한집안을 이루어 살아가다", e:"살림하는 것은 생각보다 손이 많이 간다."}
+        ];
+
+        // --- 어휘 학습 (플래시카드 그리드 렌더링 - 폰트 사이즈 대폭 업 및 3열) ---
+        const vocabGrid = document.getElementById('vocab-grid-container');
+        vocabData.forEach(data => {
+            vocabGrid.innerHTML += `
+                <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <h4 class="text-3xl font-black text-orange-600 mb-2">${data.w}</h4>
+                            <span class="text-base text-slate-400 mt-2">클릭하여 뜻 확인 👆</span>
+                        </div>
+                        <div class="flip-card-back">
+                            <p class="text-slate-800 text-lg font-bold mb-4 w-full leading-relaxed">${data.m}</p>
+                            <p class="text-base font-bold text-blue-700 bg-blue-50 p-3 rounded-lg w-full flex items-start text-left">
+                                <span class="shrink-0 mr-2 mt-0.5">예:</span>
+                                <strong class="text-blue-900 leading-relaxed">${data.e}</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        function vocabMode(mode) {
+            const btnLearn = document.getElementById('btn-vocab-learn');
+            const btnGame = document.getElementById('btn-vocab-game');
+            const areaLearn = document.getElementById('vocab-learning-area');
+            const areaGame = document.getElementById('vocab-game-area');
+            
+            if(mode === 'learn') {
+                btnLearn.className = "px-4 py-1 rounded bg-orange-500 text-white font-bold text-sm";
+                btnGame.className = "px-4 py-1 rounded bg-slate-200 text-slate-600 font-bold text-sm";
+                areaLearn.classList.remove('hidden'); areaLearn.classList.add('block');
+                areaGame.classList.remove('block'); areaGame.classList.add('hidden');
+                cancelAnimationFrame(gameLoopId);
+            } else {
+                btnGame.className = "px-4 py-1 rounded bg-orange-500 text-white font-bold text-sm";
+                btnLearn.className = "px-4 py-1 rounded bg-slate-200 text-slate-600 font-bold text-sm";
+                areaGame.classList.remove('hidden'); areaGame.classList.add('block');
+                areaLearn.classList.remove('block'); areaLearn.classList.add('hidden');
+            }
+        }
+        
+        // --- 게임 로직 ---
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let gameLoopId;
+        let gameState = 'start'; 
+        
+        let player = { x: 375, y: 340, w: 50, h: 50, speed: 7, dx: 0 };
+        let bullets = [];
+        let enemies = [];
+        let score = 0;
+        let lives = 3;
+        let currentTargetWord = null;
+        
+        let leftPressed = false;
+        let rightPressed = false;
+        
+        document.addEventListener('keydown', (e) => {
+            if(gameState !== 'playing') return;
+            if(e.key === 'ArrowLeft') leftPressed = true;
+            if(e.key === 'ArrowRight') rightPressed = true;
+            if(e.key === ' ' || e.code === 'Space') shoot();
+            if(e.key === ' ' && e.target === document.body) e.preventDefault();
+        });
+        document.addEventListener('keyup', (e) => {
+            if(e.key === 'ArrowLeft') leftPressed = false;
+            if(e.key === 'ArrowRight') rightPressed = false;
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+             e.preventDefault();
+             if(gameState !== 'playing') return;
+             const rect = canvas.getBoundingClientRect();
+             const touchX = e.touches[0].clientX - rect.left;
+             const scaleX = canvas.width / rect.width;
+             const mappedX = touchX * scaleX;
+             player.x = mappedX - player.w/2;
+             shoot();
+        }, {passive: false});
+
+        function shoot() {
+            bullets.push({ x: player.x + player.w/2 - 2, y: player.y, w: 4, h: 10, speed: 10 });
+        }
+
+        function spawnEnemy() {
+            if(enemies.length < 3) {
+                if(enemies.length === 0 && !currentTargetWord) setNewTarget();
+                
+                let availableWords = vocabData.filter(v => 
+                    !enemies.find(e => e.word.w === v.w) && 
+                    (currentTargetWord ? v.w !== currentTargetWord.w : true)
+                );
+                
+                let hasTarget = enemies.some(e => e.word.w === currentTargetWord.w);
+                let wObj;
+                
+                if(!hasTarget && Math.random() < 0.6) {
+                    wObj = currentTargetWord;
+                } else {
+                    wObj = availableWords[Math.floor(Math.random() * availableWords.length)];
+                }
+
+                if(!wObj) return;
+
+                enemies.push({
+                    x: Math.random() * (canvas.width - 80) + 10,
+                    y: -30,
+                    w: ctx.measureText(wObj.w).width + 30,
+                    h: 30,
+                    speed: 1 + Math.random() * 1.5 + (score * 0.1),
+                    word: wObj
+                });
+            }
+        }
+
+        function setNewTarget() {
+            currentTargetWord = vocabData[Math.floor(Math.random() * vocabData.length)];
+            document.getElementById('target-meaning').innerText = currentTargetWord.m;
+        }
+
+        function drawPlayer() {
+            ctx.fillStyle = '#f97316';
+            ctx.beginPath();
+            ctx.moveTo(player.x + player.w/2, player.y);
+            ctx.lineTo(player.x + player.w, player.y + player.h);
+            ctx.lineTo(player.x, player.y + player.h);
+            ctx.fill();
+        }
+
+        function drawBullets() {
+            ctx.fillStyle = '#fbbf24';
+            bullets.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+        }
+
+        function drawEnemies() {
+            ctx.font = '16px "Noto Sans KR", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            
+            enemies.forEach(e => {
+                let textWidth = ctx.measureText(e.word.w).width;
+                e.w = textWidth + 30;
+                
+                ctx.fillStyle = '#334155';
+                ctx.beginPath();
+                ctx.roundRect(e.x, e.y, e.w, e.h, 15);
+                ctx.fill();
+                ctx.strokeStyle = '#64748b';
+                ctx.stroke();
+
+                ctx.fillStyle = '#f8fafc';
+                ctx.fillText(e.word.w, e.x + e.w/2, e.y + e.h/2);
+            });
+        }
+
+        function checkCollisions() {
+            for(let i = bullets.length - 1; i >= 0; i--) {
+                for(let j = enemies.length - 1; j >= 0; j--) {
+                    let b = bullets[i];
+                    let e = enemies[j];
+                    
+                    if(b && e && b.x < e.x + e.w && b.x + b.w > e.x && b.y < e.y + e.h && b.y + b.h > e.y) {
+                        if(e.word.w === currentTargetWord.w) {
+                            score += 10;
+                            document.getElementById('game-score').innerText = score;
+                            setNewTarget();
+                            enemies = [];
+                        } else {
+                            lives--;
+                            updateLivesUI();
+                            enemies.splice(j, 1);
+                        }
+                        bullets.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }
+
+        function updateLivesUI() {
+            let hpText = '';
+            for(let i=0; i<lives; i++) hpText += '♥';
+            document.getElementById('game-lives').innerText = hpText;
+            if(lives <= 0) gameOver();
+        }
+
+        function update() {
+            if(gameState !== 'playing') return;
+
+            if(leftPressed && player.x > 0) player.x -= player.speed;
+            if(rightPressed && player.x < canvas.width - player.w) player.x += player.speed;
+
+            for(let i = bullets.length - 1; i >= 0; i--) {
+                bullets[i].y -= bullets[i].speed;
+                if(bullets[i].y < 0) bullets.splice(i, 1);
+            }
+
+            for(let i = enemies.length - 1; i >= 0; i--) {
+                enemies[i].y += enemies[i].speed;
+                if(enemies[i].y > canvas.height) {
+                    if(enemies[i].word.w === currentTargetWord.w) {
+                        lives--;
+                        updateLivesUI();
+                    }
+                    enemies.splice(i, 1);
+                }
+            }
+
+            if(Math.random() < 0.02) spawnEnemy();
+            
+            checkCollisions();
+            draw();
+            gameLoopId = requestAnimationFrame(update);
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer();
+            drawBullets();
+            drawEnemies();
+        }
+
+        function startGame() {
+            document.getElementById('game-overlay').classList.add('hidden');
+            score = 0;
+            lives = 3;
+            enemies = [];
+            bullets = [];
+            player.x = 375;
+            player.y = 340; // 리셋시 위치 조정
+            document.getElementById('game-score').innerText = score;
+            updateLivesUI();
+            setNewTarget();
+            gameState = 'playing';
+            update();
+        }
+
+        function gameOver() {
+            gameState = 'over';
+            document.getElementById('game-overlay').classList.remove('hidden');
+            document.getElementById('game-msg-title').innerText = "Game Over";
+            document.getElementById('game-msg-desc').innerText = `최종 점수: ${score}점\n다시 도전해보세요!`;
+        }
+
+        // --- 형성 평가 로직 (즉각 피드백 디자인 강화) ---
+        const quizData = [
+            // [비린내라뇨!] 5문항 (OX 1, 단답 1, 5지 3)
+            { type: "ox", q: "1. [비린내라뇨!] 이 시의 말하는 이는 평범한 사람이다.", ans: "X", exp: "이 시의 화자(말하는 이)는 평범한 사람이 아닌 '물고기'임." },
+            { type: "short", q: "2. [비린내라뇨!] 시에서 물고기들은 자신들의 비린내를 무작정 나쁘다고 말하는 사람들의 태도를 무엇이라고 비판했습니까?", ans: "언어폭력", exp: "상대의 특성을 고려하지 않고 함부로 단정짓는 것을 '언어폭력'이라 지칭함." },
+            { type: "mcq", q: "3. [비린내라뇨!] 이 시의 주제로 가장 알맞은 것은?", 
+              options: ["바다 환경 오염의 심각성을 깨닫자.", "물고기의 소중함을 알고 보호하자.", "자신의 관점으로 다른 대상을 함부로 판단하지 말자.", "나쁜 냄새가 나는 것을 멀리하고 깨끗이 하자.", "언어폭력의 법적 처벌을 강화하자."], ans: 3, exp: "자신만의 잣대로 타인을 섣불리 평가하거나 편견을 가지지 말자는 것이 핵심 주제임." },
+            { type: "mcq", q: "4. [비린내라뇨!] 시에서 화자(물고기)가 생각하는 '비린내'의 의미는?", 
+              options: ["숨기고 싶은 부끄러운 냄새", "각각의 특성에 따라 다르게 나는 다양한 향기(체취)", "비위가 상하는 역겨운 냄새", "사람들을 위협하기 위한 무기", "바다가 오염되어 나는 냄새"], ans: 2, exp: "사람들에게는 역겨운 냄새일지라도 물고기들에게는 각자의 고유한 체취이자 향기임." },
+            { type: "mcq", q: "5. [비린내라뇨!] '물고기'를 화자로 설정하여 얻는 효과로 적절한 것은?", 
+              options: ["시의 분위기를 어둡고 무겁게 만든다.", "인간 중심적인 생각에서 벗어나 참신한 관점으로 대상을 바라보게 한다.", "과학적인 사실을 객관적으로 전달한다.", "말하는 이를 시인과 동일시하여 사실감을 높인다.", "동화 같은 신비로운 분위기만 강조한다."], ans: 2, exp: "대상이 되는 사물(물고기)의 입장이 되어봄으로써 발상의 전환을 이끌어내고 참신한 깨달음을 줌." },
+            
+            // [기차가 달려간 곳에는] 10문항 (OX 2, 단답 2, 5지 6)
+            { type: "ox", q: "6. [기차가 달려간 곳에는] 이 소설은 시간의 흐름에 따라 '현재-과거-현재'로 내용이 전개되는 역순행적 구성을 취하고 있다.", ans: "O", exp: "현재(교실)에서 기차를 탔던 과거를 회상하고 다시 현재로 돌아오는 역순행적 구조임." },
+            { type: "ox", q: "7. [기차가 달려간 곳에는] '나'는 고모네 집에서 아빠가 계신 서울로 향할 때, 할머니의 허락을 받고 출발했다.", ans: "X", exp: "'나'는 고모네 집에서 무작정 기차를 타고 할머니 몰래 서울로 향함." },
+            { type: "short", q: "8. [기차가 달려간 곳에는] 작품 속 '나'가 자신의 이야기를 독자에게 직접 들려주는 소설의 시점을 무엇이라고 합니까?", ans: "1인칭주인공시점", exp: "'나'가 주인공이 되어 자신의 내면과 겪은 일을 전달하므로 '1인칭 주인공 시점'임." },
+            { type: "short", q: "9. [기차가 달려간 곳에는] 소설의 구성 단계 중, '나'가 예상과 달리 좁은 쪽방에서 고생스럽게 살고 있는 아빠의 모습에 속상해하는 단계는 어디입니까?", ans: "위기", exp: "발단-전개-위기-절정-결말 중 갈등이나 긴장감이 고조되는 '위기' 단계에 해당함." },
+            { type: "mcq", q: "10. [기차가 달려간 곳에는] 이 소설의 서술자인 '나(한연우)'에 대한 설명으로 알맞은 것은?", 
+              options: ["동생 연서를 돌보아야 한다는 책임감이 강하고 가족을 사랑한다.", "할머니의 잔소리가 듣기 싫어 영원히 가출을 결심한다.", "자신의 감정을 사람들에게 적극적으로 솔직하게 다 말한다.", "태권도 사범이 되기 위해 아빠에게 돈을 요구한다.", "아빠를 끝까지 이해하지 못하고 원망한다."], ans: 1, exp: "겉으로는 표현이 서툴고 퉁명스럽지만, 속이 깊고 가족에 대한 책임감과 사랑이 강한 인물임." },
+            { type: "mcq", q: "11. [기차가 달려간 곳에는] '나'가 무작정 아빠를 만나러 서울로 갈 때 주머니에 들고 있던 것은?", 
+              options: ["엄마의 사진", "생라면", "오만 원권 두 장", "기차 시간표", "태권도복"], ans: 3, exp: "주머니에 든 오만 원권 두 장을 더듬으며 서울행 기차에 오름." },
+            { type: "mcq", q: "12. [기차가 달려간 곳에는] 아빠가 서울에서 겪고 있는 고단하고 힘겨운 삶을 단적으로 보여주는 공간적 배경은?", 
+              options: ["동대구역", "고모네 집", "쪽방", "태권도장", "학교 교실"], ans: 3, exp: "서울역 근처의 비좁고 열악한 '쪽방'은 아빠의 고단한 현실을 시각적으로 보여주는 공간임." },
+            { type: "mcq", q: "13. [기차가 달려간 곳에는] 아빠가 서울에서 고생하며 일하는 목적이자, 이루고자 하는 희망을 비유적으로 나타낸 소재는?", 
+              options: ["양말", "트랙터", "생라면", "꽃밭", "가족사진"], ans: 2, exp: "돈을 벌어 '논밭과 트랙터'를 사서 가족과 다시 함께 살겠다는 희망을 품고 일함." },
+            { type: "mcq", q: "14. [기차가 달려간 곳에는] 결말 부분에서 '나'가 교실에서 씹어 먹는 '생라면'의 의미로 가장 적절한 단어는?", 
+              options: ["점심을 굶어 허기진 배를 달래는 수단", "할머니에 대한 반항심의 표현", "아빠를 응원하고 희망을 다짐하는 매개체", "선생님에게 혼나기 위해 일부러 하는 행동", "동생 연서가 제일 좋아하는 간식"], ans: 3, exp: "생라면을 와작와작 씹는 것은 굳세게 희망을 키워가는 아빠를 속으로 진심을 다해 응원하는 행위임." },
+            { type: "mcq", q: "15. [기차가 달려간 곳에는] 이 소설에서 사용된 '역순행적 구성'의 효과로 가장 알맞은 것은?", 
+              options: ["과거의 사건이 현재의 '나'에게 어떤 긍정적 영향을 미쳤는지 강조한다.", "결말을 먼저 보여주어 독자의 궁금증을 없앤다.", "시간을 순서대로 배열하여 이해하기 쉽게 만든다.", "등장인물의 성격이 변하지 않음을 보여준다.", "사건의 흐름을 복잡하게 꼬아서 혼란을 준다."], ans: 1, exp: "과거 서울에 다녀온 경험(아빠와의 만남)이 현재의 나를 어떻게 한 뼘 더 성장시키고 희망을 주었는지 효과적으로 보여줌." }
+        ];
+
+        let userAnswersStore = {};
+
+        const quizContainer = document.getElementById('quiz-questions-container');
+        quizData.forEach((q, index) => {
+            let html = `<div class="bg-white p-6 rounded-lg border border-slate-200 shadow-sm relative quiz-item transition-all" id="q-block-${index}">
+                            <h4 class="font-bold text-lg mb-4 text-slate-800">${q.q}</h4>`;
+            
+            if(q.type === 'ox') {
+                html += `<div class="flex gap-4">
+                            <label class="flex-1 flex items-center justify-center p-3 border rounded-lg cursor-pointer hover:bg-slate-50 transition peer-checked:bg-rose-50 peer-checked:border-rose-500">
+                                <input type="radio" name="q${index}" value="O" class="hidden peer" onchange="checkAnswer(${index})" required>
+                                <span class="text-3xl font-bold text-blue-600">O</span>
+                            </label>
+                            <label class="flex-1 flex items-center justify-center p-3 border rounded-lg cursor-pointer hover:bg-slate-50 transition peer-checked:bg-rose-50 peer-checked:border-rose-500">
+                                <input type="radio" name="q${index}" value="X" class="hidden peer" onchange="checkAnswer(${index})" required>
+                                <span class="text-3xl font-bold text-red-600">X</span>
+                            </label>
+                         </div>`;
+            } else if(q.type === 'short') {
+                html += `<div class="flex gap-2">
+                            <input type="text" name="q${index}" id="q-input-${index}" class="w-full p-3 border rounded focus:ring-2 focus:ring-rose-300 outline-none text-lg flex-1" placeholder="정답을 입력하세요" required autocomplete="off" onkeypress="if(event.key==='Enter') { event.preventDefault(); checkAnswer(${index}); }">
+                            <button type="button" id="btn-check-${index}" onclick="checkAnswer(${index})" class="px-6 py-3 bg-slate-700 hover:bg-slate-800 text-white font-bold rounded-lg transition-colors whitespace-nowrap shadow-sm">확인</button>
+                         </div>`;
+            } else if(q.type === 'mcq') {
+                html += `<div class="space-y-2">`;
+                q.options.forEach((opt, optIdx) => {
+                    html += `<label class="flex items-start p-3 border rounded-lg cursor-pointer hover:bg-slate-50 transition">
+                                <input type="radio" name="q${index}" value="${optIdx+1}" class="mt-1.5 mr-3 text-rose-600 focus:ring-rose-500 shrink-0" onchange="checkAnswer(${index})" required>
+                                <p class="leading-relaxed text-lg"><span class="font-bold mr-2 text-slate-500">${optIdx+1}.</span> ${opt}</p>
+                             </label>`;
+                });
+                html += `</div>`;
+            }
+            
+            html += `<div id="exp-${index}" class="hidden mt-5 p-5 rounded-lg text-base font-medium border-l-[6px]"></div>`;
+            html += `</div>`;
+            quizContainer.innerHTML += html;
+        });
+
+        // 문제 즉시 채점 로직 (피드백 UI 강화)
+        function checkAnswer(index) {
+            if(userAnswersStore[index]) return; 
+
+            const form = document.getElementById('quizForm');
+            let userAnswer = form[`q${index}`].value.trim();
+            if(!userAnswer) return; 
+
+            let q = quizData[index];
+            let isCorrect = false;
+
+            if(q.type === 'short') {
+                isCorrect = (userAnswer.replace(/\s/g, '') === q.ans.replace(/\s/g, ''));
+            } else {
+                isCorrect = (userAnswer == q.ans);
+            }
+
+            userAnswersStore[index] = {
+                answer: userAnswer,
+                isCorrect: isCorrect
+            };
+
+            // UI 갱신 (정답/오답 해설 표시)
+            let expBox = document.getElementById(`exp-${index}`);
+            let qBlock = document.getElementById(`q-block-${index}`);
+            expBox.classList.remove('hidden');
+
+            if(isCorrect) {
+                expBox.classList.add('bg-blue-50', 'text-blue-900', 'border-blue-500');
+                expBox.innerHTML = `<p class="flex items-start"><span class="font-black text-blue-700 text-lg mr-3 shrink-0">[정답 ⭕]</span> <span class="leading-relaxed pt-0.5">${q.exp}</span></p>`;
+                qBlock.classList.replace('border-slate-200', 'border-blue-300');
+                qBlock.classList.add('bg-blue-50/20');
+            } else {
+                expBox.classList.add('bg-red-50', 'text-red-900', 'border-red-500');
+                expBox.innerHTML = `<div class="flex flex-col gap-2">
+                                      <p class="flex items-start"><span class="font-black text-red-700 text-lg mr-3 shrink-0">[오답 ❌]</span> <span class="leading-relaxed font-bold text-red-700 pt-0.5">정답은 ${q.ans}입니다.</span></p>
+                                      <p class="text-slate-800 leading-relaxed ml-14">${q.exp}</p>
+                                    </div>`;
+                qBlock.classList.replace('border-slate-200', 'border-red-300');
+                qBlock.classList.add('bg-red-50/20');
+            }
+
+            // 입력 비활성화
+            let inputs = document.getElementsByName(`q${index}`);
+            inputs.forEach(input => input.disabled = true);
+            let btn = document.getElementById(`btn-check-${index}`);
+            if(btn) btn.disabled = true;
+
+            document.getElementById('submit-error-msg').classList.add('hidden');
+        }
+
+        function startQuiz() {
+            const grade = document.getElementById('qGrade');
+            const classNum = document.getElementById('qClass');
+            const studentNum = document.getElementById('qNum');
+            const name = document.getElementById('qName');
+
+            if(grade.checkValidity() && classNum.checkValidity() && studentNum.checkValidity() && name.checkValidity() && name.value.trim() !== '') {
+                grade.readOnly = true; classNum.readOnly = true; studentNum.readOnly = true; name.readOnly = true;
+                grade.classList.add('bg-slate-100'); classNum.classList.add('bg-slate-100'); 
+                studentNum.classList.add('bg-slate-100'); name.classList.add('bg-slate-100');
+                
+                document.getElementById('startQuizBtn').classList.add('hidden');
+                document.getElementById('quiz-area').classList.remove('hidden');
+                document.getElementById('student-info-section').classList.remove('border-rose-200');
+                document.getElementById('student-info-section').classList.add('border-slate-200', 'bg-slate-50');
+            } else {
+                document.getElementById('quizForm').reportValidity();
+            }
+        }
+
+        async function submitQuiz(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const loading = document.getElementById('submit-loading');
+            const errorMsg = document.getElementById('submit-error-msg');
+
+            errorMsg.classList.add('hidden');
+
+            if(Object.keys(userAnswersStore).length < quizData.length) {
+                errorMsg.classList.remove('hidden');
+                errorMsg.innerText = "풀지 않거나 '확인'하지 않은 문제가 있습니다. 모든 문제를 완료해 주세요.";
+                
+                for(let i=0; i<quizData.length; i++) {
+                    if(!userAnswersStore[i]) {
+                        document.getElementById(`q-block-${i}`).scrollIntoView({behavior: 'smooth', block: 'center'});
+                        break;
+                    }
+                }
+                return;
+            }
+
+            submitBtn.classList.add('hidden');
+            loading.classList.remove('hidden');
+
+            let scoreCount = 0;
+            let resultsData = {
+                grade: document.getElementById('qGrade').value,
+                classNum: document.getElementById('qClass').value,
+                studentNum: document.getElementById('qNum').value,
+                name: document.getElementById('qName').value,
+                answers: {}
+            };
+
+            for (let i = 0; i < quizData.length; i++) {
+                if(userAnswersStore[i].isCorrect) scoreCount++;
+                resultsData.answers[`Q${i+1}`] = {
+                    answer: userAnswersStore[i].answer,
+                    isCorrect: userAnswersStore[i].isCorrect ? 'O' : 'X'
+                };
+            }
+
+            let finalScore = Math.round((scoreCount / 15) * 100);
+            resultsData.totalScore = finalScore;
+            
+            document.getElementById('result-name').innerText = `${resultsData.grade}학년 ${resultsData.classNum}반 ${resultsData.studentNum}번 ${resultsData.name}`;
+            document.getElementById('result-score').innerText = `${finalScore}점`;
+            document.getElementById('result-emoji').innerText = finalScore >= 80 ? "🏆" : finalScore >= 60 ? "👍" : "💪";
+
+            if (typeof google !== 'undefined' && google.script && google.script.run) {
+                google.script.run
+                    .withSuccessHandler(function() {
+                        loading.classList.add('hidden');
+                        document.getElementById('resultModal').classList.remove('hidden');
+                    })
+                    .withFailureHandler(function(error) {
+                        loading.classList.add('hidden');
+                        submitBtn.classList.remove('hidden');
+                        errorMsg.classList.remove('hidden');
+                        errorMsg.innerText = "데이터 저장 중 오류가 발생함: " + error.message;
+                    })
+                    .saveQuizData(resultsData);
+            } else {
+                console.log("구글 앱스 스크립트 환경이 아님. 내부망 테스트 모드로 작동함.");
+                loading.classList.add('hidden');
+                document.getElementById('resultModal').classList.remove('hidden');
+            }
+        }
+
+        function closeResult() {
+            document.getElementById('resultModal').classList.add('hidden');
+        }
+
+    </script>
+</body>
+</html>
